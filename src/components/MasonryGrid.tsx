@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import ImageCard from './ImageCard';
+import ImageMeta from './ImageMeta';
 
 interface MediaImage {
   id: string;
@@ -11,6 +12,15 @@ interface MediaImage {
   aspectRatio: number;
   fullSrc: string;
   thumbSrc: string;
+  exif: {
+    camera: string;
+    lens: string;
+    date: string;
+    aperture: string;
+    shutterSpeed: string;
+    iso: string;
+    focalLength: string;
+  };
 }
 
 interface MasonryGridProps {
@@ -76,11 +86,13 @@ export default function MasonryGrid({ images }: MasonryGridProps) {
             <img
               src={loadedImages[activeIndex].fullSrc}
               alt={loadedImages[activeIndex].id}
-              className="max-w-full max-h-[85vh] object-contain rounded-sm shadow-2xl"
+              className="max-w-full max-h-[70vh] object-contain rounded-sm shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             />
 
-            <div className="absolute top-full mt-3 flex items-center justify-center gap-4">
+            <ImageMeta exif={loadedImages[activeIndex].exif} />
+
+            <div className="flex items-center justify-center gap-4 mt-3">
               <a
                 href={loadedImages[activeIndex].fullSrc}
                 download={loadedImages[activeIndex].id + '.jpg'}

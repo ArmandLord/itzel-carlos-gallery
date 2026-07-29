@@ -26,7 +26,7 @@ function formatShutterSpeed(exposureTime) {
   if (!exposureTime) return '';
   if (typeof exposureTime === 'number') {
     if (exposureTime < 1) {
-      return (1 / exposureTime).toFixed(0) + 's';
+      return '1/' + Math.round(1 / exposureTime) + 's';
     }
     return exposureTime + 's';
   }
@@ -41,6 +41,16 @@ function formatFocalLength(focalLength) {
   return String(focalLength);
 }
 
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+  } catch {
+    return String(dateStr);
+  }
+}
+
 async function extractExif(filePath) {
   try {
     const exif = await exifr.parse(filePath);
@@ -49,7 +59,7 @@ async function extractExif(filePath) {
     return {
       camera: exif.Make && exif.Model ? exif.Make + ' ' + exif.Model : (exif.Make || exif.Model || ''),
       lens: exif.LensModel || exif.Lens || '',
-      date: exif.DateTimeOriginal || exif.DateTime || '',
+      date: formatDate(exif.DateTimeOriginal || exif.DateTime || ''),
       aperture: formatAperture(exif.FNumber),
       shutterSpeed: formatShutterSpeed(exif.ExposureTime),
       iso: exif.ISO ? String(exif.ISO) : '',

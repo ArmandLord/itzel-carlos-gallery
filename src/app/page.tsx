@@ -4,7 +4,7 @@ import MasonryGrid from '@/components/MasonryGrid';
 import Hero from '@/components/Hero';
 import DownloadAll from '@/components/DownloadAll';
 
-type ImageMeta = {
+type MetaImage = {
   id: string;
   filename: string;
   width: number;
@@ -12,12 +12,32 @@ type ImageMeta = {
   aspectRatio: number;
   fullSrc: string;
   thumbSrc: string;
+  exif: {
+    camera: string;
+    lens: string;
+    date: string;
+    aperture: string;
+    shutterSpeed: string;
+    iso: string;
+    focalLength: string;
+  };
 };
 
-function getImages(): ImageMeta[] {
+export const metadata = {
+  title: 'Galería Fotográfica | Itzel & Carlos',
+  description: 'Galería de fotografías de Itzel y Carlos. Explora nuestras mejores fotos capturadas con una Sony ILCE-6700.',
+  openGraph: {
+    title: 'Galería Fotográfica | Itzel & Carlos',
+    description: 'Galería de fotografías de Itzel y Carlos.',
+    type: 'website',
+    images: ['/hero.jpg'],
+  },
+};
+
+function getImages(): MetaImage[] {
   const dataPath = path.join(process.cwd(), 'src', 'data', 'images.json');
   const raw = fs.readFileSync(dataPath, 'utf-8');
-  return JSON.parse(raw) as ImageMeta[];
+  return JSON.parse(raw) as MetaImage[];
 }
 
 export default function Home() {
