@@ -41,6 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 # Generated at build time (thumbnails + metadata)
+/src/data/
 /public/media/thumbs/
 /public/data/
 
