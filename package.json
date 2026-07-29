@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/generate-thumbs.js && next build",
     "start": "next start",
     "lint": "eslint",
-    "generate-thumbs": "node scripts/generate-thumbs.js",
-    "postinstall": "npm run generate-thumbs"
+    "generate-thumbs": "node scripts/generate-thumbs.js"
   },
   "dependencies": {
     "exifr": "^7.1.3",
