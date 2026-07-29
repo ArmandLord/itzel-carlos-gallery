@@ -5,7 +5,8 @@ const path = require('path');
 
 const MEDIA_DIR = path.join(process.cwd(), 'public', 'media');
 const THUMBS_DIR = path.join(process.cwd(), 'public', 'media', 'thumbs');
-const METADATA_FILE = path.join(process.cwd(), 'src', 'data', 'images.json');
+const PUBLIC_DATA_DIR = path.join(process.cwd(), 'public', 'data');
+const METADATA_FILE = path.join(PUBLIC_DATA_DIR, 'images.json');
 const THUMB_WIDTH = 600;
 
 async function ensureDir(dir) {
@@ -72,6 +73,7 @@ async function extractExif(filePath) {
 
 async function generate() {
   await ensureDir(THUMBS_DIR);
+  await ensureDir(PUBLIC_DATA_DIR);
 
   const files = fs.readdirSync(MEDIA_DIR)
     .filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f))
@@ -132,7 +134,7 @@ async function generate() {
 
   fs.writeFileSync(METADATA_FILE, JSON.stringify(metadata, null, 2));
   console.log('\n\nDone! Generated ' + metadata.length + ' thumbnails in ' + ((Date.now() - start) / 1000).toFixed(1) + 's');
-  console.log('Metadata saved to src/data/images.json');
+  console.log('Metadata saved to public/data/images.json');
 }
 
 generate().catch(console.error);

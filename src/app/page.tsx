@@ -35,7 +35,7 @@ export const metadata = {
 };
 
 function getImages(): MetaImage[] {
-  const dataPath = path.join(process.cwd(), 'src', 'data', 'images.json');
+  const dataPath = path.join(process.cwd(), 'public', 'data', 'images.json');
   const raw = fs.readFileSync(dataPath, 'utf-8');
   return JSON.parse(raw) as MetaImage[];
 }

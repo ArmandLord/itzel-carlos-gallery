@@ -24,13 +24,6 @@
 .DS_Store
 *.pem
 
-# Generated thumbnails (run npm run generate-thumbs after deploy)
-/public/media/thumbs/
-/src/data/images.json
-
-# Downloads (large files - upload separately to hosting)
-/public/downloads/*.zip
-
 # debug
 npm-debug.log*
 yarn-debug.log*
@@ -46,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated at build time (thumbnails + metadata)
+/public/media/thumbs/
+/public/data/
+
+# Downloads (large files - upload separately to hosting)
+/public/downloads/*.zip
