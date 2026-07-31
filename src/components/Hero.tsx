@@ -1,5 +1,6 @@
 'use client';
 
+// test
 export default function Hero() {
   return (
     <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden bg-cover bg-center" style={{ backgroundImage: 'url(/hero.jpg)' }}>
